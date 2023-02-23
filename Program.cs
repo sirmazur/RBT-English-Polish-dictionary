@@ -27,14 +27,12 @@ class program
             public RedBlackTreeNode Left { get; set; }
             public RedBlackTreeNode Right { get; set; }
             public NodeColor Color { get; set; }
-            public int Size { get; set; }
 
-            public RedBlackTreeNode(TKey key, TValue value, NodeColor color, int size)
+            public RedBlackTreeNode(TKey key, TValue value, NodeColor color)
             {
                 Key = key;
                 Value = value;
                 Color = color;
-                Size = size;
             }
         }
 
@@ -122,7 +120,6 @@ class program
             {
                 FlipColors(node);
             }
-            node.Size = 1 + Size(node.Left) + Size(node.Right);
 
             return node;
         }
@@ -319,8 +316,6 @@ class program
             node.Left = x.Right;
             x.Right = node; x.Color = node.Color;
             node.Color = NodeColor.Red;
-            x.Size = node.Size;
-            node.Size = 1 + Size(node.Left) + Size(node.Right);
             return x;
         }
 
@@ -369,13 +364,7 @@ class program
                 FlipColors(node);
             }
 
-            node.Size = 1 + Size(node.Left) + Size(node.Right);
             return node;
-        }
-
-        private int Size(RedBlackTreeNode node)
-        {
-            return node == null ? 0 : node.Size;
         }
     }
     class TwoLanguageDictionary
